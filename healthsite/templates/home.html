@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DCVCD</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'cart\style.css' %}">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'store\style.css' %}">
+  {% comment %} <link rel="icon" href="images/favicon.png" type="image/png"> {% endcomment %}
+  <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css"
+    integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
+    crossorigin="anonymous"></script>
+  <script src="{% static 'store/script.js' %}"></script>
+  <script src="{% static 'cart/script.js' %}"></script>
+</head>
+{% block body %}
+<style>
+  .loader {
+      background: #fff;
+      {% comment %} background: radial-gradient(#fff, #fff); {% endcomment %}
+      bottom: 0;
+      left: 0;
+      overflow: hidden;
+      position: fixed;
+      right: 0;
+      top: 0;
+      z-index: 99999;
+    }
+
+    .loader-inner {
+        bottom: 0;
+        height: 60px;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100px;
+    }
+
+    .loader-line-wrap {
+        animation: 
+        spin 2000ms cubic-bezier(.175, .885, .32, 1.275) infinite
+      ;
+        box-sizing: border-box;
+        height: 50px;
+        left: 0;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        transform-origin: 50% 100%;
+        width: 100px;
+    }
+    .loader-line {
+        border: 4px solid transparent;
+        border-radius: 100%;
+        box-sizing: border-box;
+        height: 100px;
+        left: 0;
+        margin: 0 auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100px;
+    }
+    .loader-line-wrap:nth-child(1) { animation-delay: -50ms; }
+    .loader-line-wrap:nth-child(2) { animation-delay: -100ms; }
+    .loader-line-wrap:nth-child(3) { animation-delay: -150ms; }
+    .loader-line-wrap:nth-child(4) { animation-delay: -200ms; }
+    .loader-line-wrap:nth-child(5) { animation-delay: -250ms; }
+    .loader-line-wrap:nth-child(1) .loader-line {
+      border-color: hsl(0, 80%, 60%);
+      height: 90px;
+      width: 90px;
+      top: 7px;
+  }
+  .loader-line-wrap:nth-child(2) .loader-line {
+      border-color: hsl(60, 80%, 60%);
+      height: 76px;
+      width: 76px;
+      top: 14px;
+  }
+  .loader-line-wrap:nth-child(3) .loader-line {
+      border-color: hsl(120, 80%, 60%);
+      height: 62px;
+      width: 62px;
+      top: 21px;
+  }
+  .loader-line-wrap:nth-child(4) .loader-line {
+      border-color: hsl(180, 80%, 60%);
+      height: 48px;
+      width: 48px;
+      top: 28px;
+  }
+  .loader-line-wrap:nth-child(5) .loader-line {
+    border-color: hsl(240, 80%, 60%);
+    height: 34px;
+    width: 34px;
+    top: 35px;
+}
+
+@keyframes spin {
+    0%, 15% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+</style>
+{% endblock %}
+<body onload="myFunction()" style="margin:0;">
+
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-line-wrap">
+        <div class="loader-line"></div>
+      </div>
+      <div class="loader-line-wrap">
+        <div class="loader-line"></div>
+      </div>
+      <div class="loader-line-wrap">
+        <div class="loader-line"></div>
+      </div>
+      <div class="loader-line-wrap">
+        <div class="loader-line"></div>
+      </div>
+      <div class="loader-line-wrap">
+        <div class="loader-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var myVar;
+
+    function myFunction() {
+      myVar = setTimeout(showPage, 1000);
+    }
+
+    function showPage() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("myDiv").style.display = "block";
+    }
+  </script>
+{% block linkbar %}
+  <!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <!-- Navbar brand -->
+  {% comment %} <a class="navbar-brand" href="{% url 'latest_homepage' %}"><i class="fa fa-home btn-lg"></i></a> {% endcomment %}
+
+  <!-- Collapse button -->
+  <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+    aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="dark-blue-text"><i
+        class="fas fa-bars fa-1x"></i></span></button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'lowcal' %}">Low-Calories Products</a>
+          <a class="dropdown-item" href="{% url 'diabetic' %}">Low-Sugar Products</a>
+          <a class="dropdown-item" href="{% url 'protein' %}">High-Protein Products</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'products' %}">All Products</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'bev' %}">Beverages</a>
+          <a class="dropdown-item" href="{% url 'supplements' %}">Supplements</a>
+          <a class="dropdown-item" href="{% url 'nutri' %}">Nutrition Products</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BeHealthy</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'bmi' %}">Measure your BMI</a>
+            <a class="dropdown-item" href="{% url 'predict' %}">Find Diabetes Prediction</a>
+        </li>
+        {% if user.is_superuser == True  %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'adminpanel' %}">Admin Panel</a>
+        </li>
+      {% endif %}
+      {% if user.is_active %}
+      <li class="nav-item">
+        {% if user.is_superuser %}
+        {% else %}
+        <a class="nav-link" href="{% url 'cart' %}">Cart</a>
+        {% endif %}
+      </li>
+    <li class="nav-item dropdown" style="list-style:none;">
+      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+        aria-expanded="false"><i class="fa-solid fa-user"></i></a>
+      <div class="dropdown-menu">
+        <a class="nav-item nav-link active" >User: <strong>{{request.user.username}}</strong>
+        <a class="nav-link" href="{% url 'logoutpage' %}">Logout</a>
+        <a class="nav-link" href="{% url 'password_change' %}">Change password</a>
+    </li>
+
+      {% else %}
+
+      <li class="nav-item dropdown" style="list-style:none;">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+          aria-expanded="false"><i class="fa-solid fa-user"></i></a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item nav-link active" >User: <strong>{{request.user.username}}</strong>
+          <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+          <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
+      </li>
+    </ul>
+      {% endif %}
+
+</div>
+<!-- Collapsible content -->
+
+</nav>
+<!--/.Navbar-->
+{% endblock %}
+
+
+{% block welcomepage %}
+
+
+<div class="header" style='background: radial-gradient(#fff, #5254d6'>
+    <div class="row">
+        <div class="col-2">
+            <h1 style="font-family:Trebuchet MS;" >Welcome to DCVCD!<br></h1>
+            <h6 style='color:rbg(30,30,30); font-family:cursive;'>The store that uses Machine Learning to recommend top quality products tailored to your needs!</h6>
+            {% comment %} <a href="" class="btn">Explore now &#8594;</a> {% endcomment %}
+        </div>
+        <div class="col-2">
+            <image style="background:transparent;" src="static/images/apple.png" alt="motiv">
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block products %}
+<br>
+<div class="container" style="text-align:center;">
+    <h2 class="title">Our Products</h2>
+    <hr>
+    <div class="row ">
+        {% for product in latest_products %}
+        <div class="product col-md-3" style="margin-bottom: 10px;">
+            <a href="{% url 'singleproduct' product.id %}" style="text-decoration:none;">
+                <div class="card text-center">
+                    <div class="card-body ">
+                        <img src="{{product.image.url}}" width="100%" height="100%" />
+                        {% if product.is_diab %}
+                        <h5 class="card-title">{{product.commercial_name}}
+                            <span style="color:green;" data-toggle="tooltip" data-placement="top"
+                                title="Suitable for diabetics">
+                                &#9678;
+                            </span>
+                        </h5>
+                        {% else %}
+                        <h5 class="card-title">{{product.commercial_name}}</h5>
+                        {% endif %}
+                        <p class="card-text"><strong>Price: {{product.price}} &euro;</strong></p>
+                        <p class="card-text">Proteins: {{product.proteins}} /100g/ml</p>
+                        <p class="card-text">Calories: {{product.calories}} /100g/ml</p>
+                        <p class="card-text"style ='font-style:italic'>- Click to Learn More -</p>                        
+                        {% if user.is_superuser %}
+                        {% else %}
+                        <a href={% url 'add_to_basket' product.id %} class="btn btn-dark add">Add to cart</a>
+                        {% endif %}
+                    </div> 
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+        <hr>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block featuredcategories %}
+{% comment %} <div class="categories">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-3">
+                <img src="#" alt="#">
+            </div>
+            <div class="col-3">
+                <img src="#" alt="#">
+            </div>
+            <div class="col-3">
+                <img src="#" alt="#">
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+{% endblock %}
+
+{% block latest %}
+
+<h2 class="title">Latest Products</h2>
+
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" style="transform:translate(35%,5%);">
+    <div class="carousel-inner">
+        <div class="carousel-item active" style="width:30%;"><a href={% url 'latest' %}>
+                <img class=" w-100" src="static/images/whey.jpg" alt="Photo slide"></a>
+        </div>
+        <div class="carousel-item" style="width:30%;"><a href={% url 'latest' %}>
+                <img class=" w-100" src="static/images/magnesium.jpg" alt="Photo slide"></a>
+        </div>
+        <div class="carousel-item" style="width:30%;"><a href={% url 'latest' %}>
+                <img class=" w-100" src="static/images/proteinbar.jpg" alt="Photo slide"></a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block offer %}
+<div class="offer">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-4"style='padding-top:5%'>
+                <img src="images/zinc.jpg" alt="zinc" class="offer-img">
+            </div>
+            <div class="col-6">
+                <p style='color:white'>Soon Exclusively Available! Only for DCVCD members</p>
+                <h1>Zinc Supplement</h1>
+                <strong>Zinc improves glucose levels (glycaemic control) in people with diabetes. As a consequence of diabetes long‐term complications may develop, such as kidney, nerve and eye diseasemost type–2 diabetics, prediabetics, and obese patients suffer from zinc deficiency or decreased total body zinc.</strong>
+                <hr>
+                <h2>Coming soon! At the special Price of only <span style="text-decoration:line-through;color:red;"><span style='color:#555'>60&euro;</span></span>&nbsp;35&euro;!!</h2>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block testimonial %}
+<div class="testimonial">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-3">
+                <i class="fa fa-quote-left" aria-hidden="true"></i>
+                <p>The Best site to purchase your most valued supplements and keep track of key health parameters</p>
+                <div class="rating">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                {% comment %} <img src="#" alt="User image"> {% endcomment %}
+                <h3 style="">~The Health and Fitness Magazine~</h3>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      {% comment %} <div class="footer-col-1">
+        <h3>Download our app</h3>
+        <p>Download for Android and ios mobile devices.</p>
+        <div class="app-logo">
+          <img src="#" alt="Play Store Image">
+          <img src="#" alt="App Store Image">
+        </div>
+      </div> {% endcomment %}
+      <div class="footer-col-3">
+        <h3>Useful links</h3>
+        <ul>
+            <i class="fa-solid fa-circle-info"></i>
+          <li><a href="{% url 'contact' %}" style="color:white">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col-2">
+        <h2 style='color:white;' >Aspiring to provide our users tools to watch their general health in order to suggest them suitable products!</h2>
+      </div>
+      <div class="footer-col-4">
+        <h3>Follow us</h3>
+        <ul>
+        <a href="https:/www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i><li></li></a>
+        <a href="https:/www.twitter.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+          <a href="https:/www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <p class="copyright">&copy; Copyright 2022</p>
+  </div>
+</div>
+{% endblock %}

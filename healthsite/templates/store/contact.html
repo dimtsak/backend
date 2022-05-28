@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-x:hidden;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% comment %} {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'store\style.css' %}"> {% endcomment %}
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+          }
+          
+          /* Style inputs */
+          input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius:5px;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+          }
+          
+          input[type=submit] {
+            background-color: #04AA6D;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+          }
+          
+          input[type=submit] #homebutton{
+            background-color: red !important;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+          }
+
+
+          
+          input[type=submit]:hover {
+            background-color: #45a049;
+          }
+          
+          /* Style the container/contact section */
+          .container {
+            border-radius: 5px;
+            padding: 10px;
+            color: white;
+          }
+          
+          /* Create two columns that float next to eachother */
+          .col {
+            float: left;
+            width: 50%;
+            margin-top: 6px;
+            padding: 20px;
+          }
+          
+          /* Clear floats after the columns */
+          .row:after {
+            content: "";
+            display: table;
+            clear: both;
+          }
+          
+          /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+          @media screen and (max-width: 600px) {
+            .col, input[type=submit] {
+              width: 100%;
+              margin-top: 0;
+            }
+          }    
+    
+        html,
+        body {
+          width: 100%;
+          height: 100%;
+        }
+        
+        body {
+          background: radial-gradient(#8485de, #39264d);
+        }
+        
+        .container {
+          width: 100%;
+          height: 100%;
+        }
+        
+        .circle-container {
+          position: absolute;
+          transform: translateY(-10vh);
+          -webkit-animation-iteration-count: infinite;
+                  animation-iteration-count: infinite;
+          -webkit-animation-timing-function: linear;
+                  animation-timing-function: linear;
+        }
+        .circle-container .circle {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          mix-blend-mode: screen;
+          background-image: radial-gradient(#99ffff, #99ffff 10%, rgba(153, 255, 255, 0) 56%);
+          -webkit-animation: fadein-frames 200ms infinite, scale-frames 2s infinite;
+                  animation: fadein-frames 200ms infinite, scale-frames 2s infinite;
+        }
+        @-webkit-keyframes fade-frames {
+          0% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.7;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+        @keyframes fade-frames {
+          0% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.7;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+        @-webkit-keyframes scale-frames {
+          0% {
+            transform: scale3d(0.4, 0.4, 1);
+          }
+          50% {
+            transform: scale3d(2.2, 2.2, 1);
+          }
+          100% {
+            transform: scale3d(0.4, 0.4, 1);
+          }
+        }
+        @keyframes scale-frames {
+          0% {
+            transform: scale3d(0.4, 0.4, 1);
+          }
+          50% {
+            transform: scale3d(2.2, 2.2, 1);
+          }
+          100% {
+            transform: scale3d(0.4, 0.4, 1);
+          }
+        }
+        .circle-container:nth-child(1) {
+          width: 8px;
+          height: 8px;
+          -webkit-animation-name: move-frames-1;
+                  animation-name: move-frames-1;
+          -webkit-animation-duration: 8289ms;
+                  animation-duration: 8289ms;
+          -webkit-animation-delay: 8587ms;
+                  animation-delay: 8587ms;
+        }
+        @-webkit-keyframes move-frames-1 {
+          from {
+            transform: translate3d(17vw, 109vh, 0);
+          }
+          to {
+            transform: translate3d(100vw, -137vh, 0);
+          }
+        }
+        @keyframes move-frames-1 {
+          from {
+            transform: translate3d(17vw, 109vh, 0);
+          }
+          to {
+            transform: translate3d(100vw, -137vh, 0);
+          }
+        }
+        .circle-container:nth-child(1) .circle {
+          -webkit-animation-delay: 210ms;
+                  animation-delay: 210ms;
+        }
+        .circle-container:nth-child(2) {
+          width: 2px;
+          height: 2px;
+          -webkit-animation-name: move-frames-2;
+                  animation-name: move-frames-2;
+          -webkit-animation-duration: 9044ms;
+                  animation-duration: 9044ms;
+          -webkit-animation-delay: 8883ms;
+                  animation-delay: 8883ms;
+        }
+        @-webkit-keyframes move-frames-2 {
+          from {
+            transform: translate3d(32vw, 108vh, 0);
+          }
+          to {
+            transform: translate3d(85vw, -135vh, 0);
+          }
+        }
+        @keyframes move-frames-2 {
+          from {
+            transform: translate3d(32vw, 108vh, 0);
+          }
+          to {
+            transform: translate3d(85vw, -135vh, 0);
+          }
+        }
+        .circle-container:nth-child(2) .circle {
+          -webkit-animation-delay: 276ms;
+                  animation-delay: 276ms;
+        }
+        .circle-container:nth-child(3) {
+          width: 8px;
+          height: 8px;
+          -webkit-animation-name: move-frames-3;
+                  animation-name: move-frames-3;
+          -webkit-animation-duration: 10291ms;
+                  animation-duration: 10291ms;
+          -webkit-animation-delay: 2584ms;
+                  animation-delay: 2584ms;
+        }
+        @-webkit-keyframes move-frames-3 {
+          from {
+            transform: translate3d(9vw, 108vh, 0);
+          }
+          to {
+            transform: translate3d(79vw, -129vh, 0);
+          }
+        }
+        @keyframes move-frames-3 {
+          from {
+            transform: translate3d(9vw, 108vh, 0);
+          }
+          to {
+            transform: translate3d(79vw, -129vh, 0);
+          }
+        }
+        .circle-container:nth-child(3) .circle {
+          -webkit-animation-delay: 3134ms;
+                  animation-delay: 3134ms;
+        }
+        .circle-container:nth-child(4) {
+          width: 3px;
+          height: 3px;
+          -webkit-animation-name: move-frames-4;
+                  animation-name: move-frames-4;
+          -webkit-animation-duration: 8384ms;
+                  animation-duration: 8384ms;
+          -webkit-animation-delay: 8690ms;
+                  animation-delay: 8690ms;
+        }
+        @-webkit-keyframes move-frames-4 {
+          from {
+            transform: translate3d(59vw, 101vh, 0);
+          }
+          to {
+            transform: translate3d(59vw, -119vh, 0);
+          }
+        }
+        @keyframes move-frames-4 {
+          from {
+            transform: translate3d(59vw, 101vh, 0);
+          }
+          to {
+            transform: translate3d(59vw, -119vh, 0);
+          }
+        }
+        .circle-container:nth-child(4) .circle {
+          -webkit-animation-delay: 3610ms;
+                  animation-delay: 3610ms;
+        }
+        .circle-container:nth-child(5) {
+          width: 9px;
+          height: 9px;
+          -webkit-animation-name: move-frames-5;
+                  animation-name: move-frames-5;
+          -webkit-animation-duration: 10521ms;
+                  animation-duration: 10521ms;
+          -webkit-animation-delay: 4904ms;
+                  animation-delay: 4904ms;
+        }
+        @-webkit-keyframes move-frames-5 {
+          from {
+            transform: translate3d(78vw, 110vh, 0);
+          }
+          to {
+            transform: translate3d(48vw, -111vh, 0);
+          }
+        }
+        @keyframes move-frames-5 {
+          from {
+            transform: translate3d(78vw, 110vh, 0);
+          }
+          to {
+            transform: translate3d(48vw, -111vh, 0);
+          }
+        }
+        .circle-container:nth-child(5) .circle {
+          -webkit-animation-delay: 1065ms;
+                  animation-delay: 1065ms;
+        }
+        .circle-container:nth-child(6) {
+          width: 2px;
+          height: 2px;
+          -webkit-animation-name: move-frames-6;
+                  animation-name: move-frames-6;
+          -webkit-animation-duration: 10657ms;
+                  animation-duration: 10657ms;
+          -webkit-animation-delay: 388ms;
+                  animation-delay: 388ms;
+        }
+        @-webkit-keyframes move-frames-6 {
+          from {
+            transform: translate3d(44vw, 105vh, 0);
+          }
+          to {
+            transform: translate3d(15vw, -124vh, 0);
+          }
+        }
+        @keyframes move-frames-6 {
+          from {
+            transform: translate3d(44vw, 105vh, 0);
+          }
+          to {
+            transform: translate3d(15vw, -124vh, 0);
+          }
+        }
+        .circle-container:nth-child(6) .circle {
+          -webkit-animation-delay: 2571ms;
+                  animation-delay: 2571ms;
+        }
+        .circle-container:nth-child(7) {
+          width: 5px;
+          height: 5px;
+          -webkit-animation-name: move-frames-7;
+                  animation-name: move-frames-7;
+          -webkit-animation-duration: 10224ms;
+                  animation-duration: 10224ms;
+          -webkit-animation-delay: 6408ms;
+                  animation-delay: 6408ms;
+        }
+        @-webkit-keyframes move-frames-7 {
+          from {
+            transform: translate3d(55vw, 106vh, 0);
+          }
+          to {
+            transform: translate3d(88vw, -127vh, 0);
+          }
+        }
+        @keyframes move-frames-7 {
+          from {
+            transform: translate3d(55vw, 106vh, 0);
+          }
+          to {
+            transform: translate3d(88vw, -127vh, 0);
+          }
+        }
+        .circle-container:nth-child(7) .circle {
+          -webkit-animation-delay: 3317ms;
+                  animation-delay: 3317ms;
+        }
+        .circle-container:nth-child(8) {
+          width: 9px;
+          height: 9px;
+          -webkit-animation-name: move-frames-8;
+                  animation-name: move-frames-8;
+          -webkit-animation-duration: 9221ms;
+                  animation-duration: 9221ms;
+          -webkit-animation-delay: 4272ms;
+                  animation-delay: 4272ms;
+        }
+        @-webkit-keyframes move-frames-8 {
+          from {
+            transform: translate3d(25vw, 109vh, 0);
+          }
+          to {
+            transform: translate3d(54vw, -112vh, 0);
+          }
+        }
+        @keyframes move-frames-8 {
+          from {
+            transform: translate3d(25vw, 109vh, 0);
+          }
+          to {
+            transform: translate3d(54vw, -112vh, 0);
+          }
+        }
+        .circle-container:nth-child(8) .circle {
+          -webkit-animation-delay: 3355ms;
+                  animation-delay: 3355ms;
+        }
+        .circle-container:nth-child(9) {
+          width: 10px;
+          height: 10px;
+          -webkit-animation-name: move-frames-9;
+                  animation-name: move-frames-9;
+          -webkit-animation-duration: 10600ms;
+                  animation-duration: 10600ms;
+          -webkit-animation-delay: 9943ms;
+                  animation-delay: 9943ms;
+        }
+        @-webkit-keyframes move-frames-9 {
+          from {
+            transform: translate3d(33vw, 101vh, 0);
+          }
+          to {
+            transform: translate3d(61vw, -122vh, 0);
+          }
+        }
+        @keyframes move-frames-9 {
+          from {
+            transform: translate3d(33vw, 101vh, 0);
+          }
+          to {
+            transform: translate3d(61vw, -122vh, 0);
+          }
+        }
+        .circle-container:nth-child(9) .circle {
+          -webkit-animation-delay: 3495ms;
+                  animation-delay: 3495ms;
+        }
+        .circle-container:nth-child(10) {
+          width: 7px;
+          height: 7px;
+          -webkit-animation-name: move-frames-10;
+                  animation-name: move-frames-10;
+          -webkit-animation-duration: 8388ms;
+                  animation-duration: 8388ms;
+          -webkit-animation-delay: 1386ms;
+                  animation-delay: 1386ms;
+        }
+        @-webkit-keyframes move-frames-10 {
+          from {
+            transform: translate3d(8vw, 106vh, 0);
+          }
+          to {
+            transform: translate3d(82vw, -111vh, 0);
+          }
+        }
+        @keyframes move-frames-10 {
+          from {
+            transform: translate3d(8vw, 106vh, 0);
+          }
+          to {
+            transform: translate3d(82vw, -111vh, 0);
+          }
+        }
+        .circle-container:nth-child(10) .circle {
+          -webkit-animation-delay: 1351ms;
+                  animation-delay: 1351ms;
+        }
+        .circle-container:nth-child(11) {
+          width: 3px;
+          height: 3px;
+          -webkit-animation-name: move-frames-11;
+                  animation-name: move-frames-11;
+          -webkit-animation-duration: 9479ms;
+                  animation-duration: 9479ms;
+          -webkit-animation-delay: 5083ms;
+                  animation-delay: 5083ms;
+        }
+        @-webkit-keyframes move-frames-11 {
+          from {
+            transform: translate3d(46vw, 102vh, 0);
+          }
+          to {
+            transform: translate3d(6vw, -114vh, 0);
+          }
+        }
+        @keyframes move-frames-11 {
+          from {
+            transform: translate3d(46vw, 102vh, 0);
+          }
+          to {
+            transform: translate3d(6vw, -114vh, 0);
+          }
+        }
+        .circle-container:nth-child(11) .circle {
+          -webkit-animation-delay: 3073ms;
+                  animation-delay: 3073ms;
+        }
+        .circle-container:nth-child(12) {
+          width: 6px;
+          height: 6px;
+          -webkit-animation-name: move-frames-12;
+                  animation-name: move-frames-12;
+          -webkit-animation-duration: 10695ms;
+                  animation-duration: 10695ms;
+          -webkit-animation-delay: 3539ms;
+                  animation-delay: 3539ms;
+        }
+        @-webkit-keyframes move-frames-12 {
+          from {
+            transform: translate3d(73vw, 108vh, 0);
+          }
+          to {
+            transform: translate3d(53vw, -112vh, 0);
+          }
+        }
+        @keyframes move-frames-12 {
+          from {
+            transform: translate3d(73vw, 108vh, 0);
+          }
+          to {
+            transform: translate3d(53vw, -112vh, 0);
+          }
+        }
+        .circle-container:nth-child(12) .circle {
+          -webkit-animation-delay: 3891ms;
+                  animation-delay: 3891ms;
+        }
+{% comment %} Loading Animation {% endcomment %}
+
+
+  .loader {
+    background: #fff;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 99999;
+  }
+
+  .loader-inner {
+      bottom: 0;
+      height: 60px;
+      left: 0;
+      margin: auto;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100px;
+  }
+
+  .loader-line-wrap {
+      animation: 
+      spin 2000ms cubic-bezier(.175, .885, .32, 1.275) infinite
+    ;
+      box-sizing: border-box;
+      height: 50px;
+      left: 0;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      transform-origin: 50% 100%;
+      width: 100px;
+  }
+  .loader-line {
+      border: 4px solid transparent;
+      border-radius: 100%;
+      box-sizing: border-box;
+      height: 100px;
+      left: 0;
+      margin: 0 auto;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100px;
+  }
+  .loader-line-wrap:nth-child(1) { animation-delay: -50ms; }
+  .loader-line-wrap:nth-child(2) { animation-delay: -100ms; }
+  .loader-line-wrap:nth-child(3) { animation-delay: -150ms; }
+  .loader-line-wrap:nth-child(4) { animation-delay: -200ms; }
+  .loader-line-wrap:nth-child(5) { animation-delay: -250ms; }
+
+  .loader-line-wrap:nth-child(1) .loader-line {
+      border-color: hsl(0, 80%, 60%);
+      height: 90px;
+      width: 90px;
+      top: 7px;
+  }
+  .loader-line-wrap:nth-child(2) .loader-line {
+      border-color: hsl(60, 80%, 60%);
+      height: 76px;
+      width: 76px;
+      top: 14px;
+  }
+  .loader-line-wrap:nth-child(3) .loader-line {
+      border-color: hsl(120, 80%, 60%);
+      height: 62px;
+      width: 62px;
+      top: 21px;
+  }
+  .loader-line-wrap:nth-child(4) .loader-line {
+      border-color: hsl(180, 80%, 60%);
+      height: 48px;
+      width: 48px;
+      top: 28px;
+  }
+  .loader-line-wrap:nth-child(5) .loader-line {
+      border-color: hsl(240, 80%, 60%);
+      height: 34px;
+      width: 34px;
+      top: 35px;
+  }
+
+  
+  
+  @keyframes spin {
+    0%, 15% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+
+
+{% comment %}  Google Map {% endcomment %}
+        iframe {
+          -webkit-filter: grayscale(80%);
+                  filter: grayscale(80%);
+        }
+        
+        iframe:hover {
+          filter: none;
+          -webkit-filter: grayscale(0%);
+        }
+
+        
+        
+    </style>
+</head>
+
+<body onload="myFunction()" style="margin:0;">
+
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-line-wrap">
+        <div class="loader-line"></div>
+      </div>
+      <div class="loader-line-wrap">
+        <div class="loader-line"></div>
+      </div>
+      <div class="loader-line-wrap">
+        <div class="loader-line"></div>
+      </div>
+      <div class="loader-line-wrap">
+        <div class="loader-line"></div>
+      </div>
+      <div class="loader-line-wrap">
+        <div class="loader-line"></div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="container" id="myDiv">
+
+  
+  <div style="text-align:center">
+    <h2>Contact Us</h2>
+    <p>Find us on Pesmatzoglou 1231, or leave us a message:</p>
+  </div>
+
+  <div class='row'>
+  
+      <div class="col">
+        <form action="#" style="width:100%;">
+          <label for="fname" >First Name</label>
+          <input type="text" id="fname" name="firstname" placeholder="Your name..">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" placeholder="Your email address..">
+          <label for="subject">Subject</label>
+          <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
+          <input type="submit" value="Send">
+        </form>
+        <div style='margin-top:10px'>
+          <a href="{% url 'latest_homepage' %}"><input type="button" class='btn btn-dark' value="Back to Homepage"><i class="fa fa-home btn-lg"></i></a>
+        </div>
+      </div>
+      <div class="row">
+      <div class="col">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3144.834807758897!2d23.728839915323533!3d37.98098427972234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1bd3a50c354a5%3A0x3db5a533bcfb0690!2zzqDOtc-DzrzOsc62z4zOs867zr_PhSwgzpHOuM6uzr3OsQ!5e0!3m2!1sel!2sgr!4v1651010150743!5m2!1sel!2sgr" width="100%" height="81%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      </div>
+  </div>
+    
+
+    
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+  </div>
+
+  <script>
+    var myVar;
+    
+    function myFunction() {
+      myVar = setTimeout(showPage, 1000);
+    }
+    
+    function showPage() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("myDiv").style.display = "block";
+    }
+
+  </script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,76 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+
+<div>
+{% block content %}
+{% if user.is_superuser == False %}
+<h1>Did you play with urls?</h1>
+<a href = {% url 'latest' %}>Go back</a>
+{% else %}
+
+<form method='POST' style="width:50%; margin-left:200px;">
+    {% csrf_token %}
+    <ul>
+        <li>
+            <br>
+                {% if Existing %}
+                <div><h4 style="background-color:powderblue;"> Try again!{{ Existing }} </h4></div>
+                {% endif %}
+            <br>
+                {% if Digits %}
+                <div><h4 style="background-color:powderblue;"> Try again! {{ Digits }}</h4></div>
+                {% endif %}
+               <br>
+        </li>
+        <li>{{form|crispy}}</li>
+    </ul>
+    </div>
+    <button class='btn btn-success'>Submit</button>
+</form>
+
+{% endif %}
+{% endblock %}
+
+{% block product %}
+<div>
+    <p>{{product}}</p>
+</div>
+{%  endblock %}
+</div>
+
+{% block footer %}
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      {% comment %} <div class="footer-col-1">
+        <h3>Download our app</h3>
+        <p>Download for Android and ios mobile devices.</p>
+        <div class="app-logo">
+          <img src="#" alt="Play Store Image">
+          <img src="#" alt="App Store Image">
+        </div>
+      </div> {% endcomment %}
+      <div class="footer-col-3">
+        <h3>Useful links</h3>
+        <ul>
+            <i class="fa-solid fa-circle-info" style='color:blue;'></i>
+          <li><a href="{% url 'contact' %}" style="color:white">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col-2">
+        <p>Aspiring to provide our users tools to watch their general health in order to suggest them suitable products!</p>
+      </div>
+      <div class="footer-col-4">
+        <h3>Follow us</h3>
+        <ul>
+        <a href="https:/www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i><li></li></a>
+        <a href="https:/www.twitter.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+          <a href="https:/www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <p class="copyright">&copy; Copyright 2022</p>
+  </div>
+</div>
+{% endblock %}

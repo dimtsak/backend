@@ -1,0 +1,20 @@
+{% extends 'diabetes/base.html' %}
+
+{% block content %}
+
+<h3> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; CORRELATION OF FACTORS INFO</h3>
+<img src='/images/heatmap.png' alt ='cant put an image'>
+<p>This is a diagram showing the correlation of each parameter with each other and with the final outcome</p>
+<p> the right you can see the rate at which it is related!</p>
+<p>The brighter the color,the greatest the correlation</p>
+<p>E.g we can see that the square that connects th BMI with the outcome has a deep purple color.Looking
+    at the column at the right we can see that the correlation is quite high,indicateing that a high BMI
+is a moderataly high risk factor for developing type 2 diabetes (people with high BMI are more susceptible to developing type 2 diabetes accuracy
+as compared to people with a normal BMI)As expected BMI is highly related with skin thickness
+as the square connecting them has a bright purple color</p>
+<p>As we can see glucose has the brightest color when we look at the outcome column or row,
+    indicating that it's the highest risk factor from all.It is remarkable that the risk of developing type 2 diabetes 
+    is also highly related with the number of pregnancies,as the risk rises as the number increasres.
+</p>
+
+{% endblock %}

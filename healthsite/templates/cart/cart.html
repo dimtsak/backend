@@ -1,0 +1,156 @@
+{% extends 'index.html' %}
+{% block linkbar %}
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <!-- Navbar brand -->
+  <a class="navbar-brand" href="{% url 'latest_homepage' %}"><i class="fa fa-home btn-lg"></i></a>
+
+  <!-- Collapse button -->
+  <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse"
+    data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false"
+    aria-label="Toggle navigation"><span class="dark-blue-text"><i class="fas fa-bars fa-1x"></i></span></button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+          aria-expanded="false">Products</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'lowcal' %}">Low-Calories Products</a>
+          <a class="dropdown-item" href="{% url 'diabetic' %}">Low-Sugar Products</a>
+          <a class="dropdown-item" href="{% url 'protein' %}">High-Protein Products</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'products' %}">All Products</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+          aria-expanded="false">Categories</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'bev' %}">Beverages</a>
+          <a class="dropdown-item" href="{% url 'supplements' %}">Supplements</a>
+          <a class="dropdown-item" href="{% url 'nutri' %}">Nutrition Products</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+          aria-expanded="false">BeHealthy</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'bmi' %}">Measure your BMI</a>
+          <a class="dropdown-item" href="{% url 'predict' %}">Find Diabetes Prediction</a>
+      </li>
+      {% if user.is_superuser == True %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'adminpanel' %}">Admin Panel</a>
+      </li>
+      {% endif %}
+      {% if user.is_active %}
+      <li class="nav-item dropdown" style="list-style:none;">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+          aria-expanded="false"><i class="fa-solid fa-user"></i></a>
+        <div class="dropdown-menu">
+          <a class="nav-item nav-link active">User: <strong>{{request.user.username}}</strong>
+            <a class="nav-link" href="{% url 'logoutpage' %}">Logout</a>
+            <a class="nav-link" href="{% url 'password_change' %}">Change password</a>
+      </li>
+
+      {% else %}
+
+      <li class="nav-item dropdown" style="list-style:none; ">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true"
+          aria-expanded="false"><i class="fa-solid fa-user"></i></a>
+        <div class="dropdown-menu">
+          <a class="nav-link" href="{% url 'login'%}">Login</a>
+          <a class="nav-link" href="{% url 'registration'%}">Sign up</a>
+      </li>
+
+      {% endif %}
+
+    </ul>
+
+    <!-- Links -->
+
+  </div>
+  <!-- Collapsible content -->
+
+</nav>
+<!--/.Navbar-->
+
+{% endblock %}
+</div>
+{% block content %}
+<div class="container" style='min-height:100vh'>
+
+  <div class="row">
+
+    <div class="col-md-6">
+
+      <h1 style='text-align:center'>Products in cart:</h1>
+      {% if Basketitems == 0 %}
+      <br>
+      <h6 style="color:gray; text-align:center;">There are no products in cart</h6>
+      {% else %}
+
+      <div class="table-responsive-md">
+        <table class="table table-hover table-bordered table-light ">
+          <thead style='text-align:center'>
+            <tr>
+              <th scope="col">Product Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+            </tr>
+          </thead>
+          {% for i in product %}
+          {% for k,j in frequencies.items %}
+          {% if i.name in k %}
+          <tr>
+
+            <td><a href="{% url 'singleproduct' i.id %}"style="color:black"><img src="{{i.image.url}}" width="100px" height="100px" />
+              {{i.commercial_name}}</a></td>
+            <td style="text-align:center;" class="align-middle">{{i.price}} &euro;</td>
+
+
+
+            <td style="text-align:center;" class="align-middle"><a href="{% url 'remove_product_from_basket' i.id %}">
+                <i class="bi bi-dash-circle-fill " style="color:black;"></i></a>
+
+              {{j}}&nbsp;&nbsp;
+              <a href="{% url 'add_to_basket' i.id %}">
+                <i class="bi bi-plus-circle-fill " style="color:black"></i></a>
+            </td>
+          </tr>
+          <br>
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
+        </table>
+      </div>
+
+      {% endif %}
+
+    </div>
+
+    
+    
+    
+    <br>
+    <div id="totalitems" class="col-md-6" style='padding-left:7%' >
+
+      <br>
+      <h3>Total cost for {{Basketitems}} items:</h3>
+      {{total}} $
+      <br>
+      <a class='btn btn-success' href="{% url 'products' %}">Continue Shopping &nbsp;<span><i
+        class="bi bi-shop"></i></span></a>
+        <a class='btn btn-warning' href="{% url 'order' %}">Go to Order Details &nbsp;<i class="bi bi-cash-coin"></i></a>
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

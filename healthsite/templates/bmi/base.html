@@ -1,0 +1,282 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--bokeh-->
+      <link rel="stylesheet" type="text/css" href="http://cdn.pydata.org/bokeh/release/bokeh-2.1.1.min.css"/>
+      <link rel="stylesheet" type="text/css" href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-2.1.1.min.css"/>
+      <link rel="stylesheet" type="text/css" href="http://cdn.pydata.org/bokeh/release/bokeh-tables-2.1.1.min.css"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "static/bootstarp.min.css" %}">
+    <!--bmi style-->
+    <link rel="stylesheet" href="{% static "bmi/style.css" %}">
+
+    <title>Bmi Calculator</title>
+
+    <style>
+      {
+        % comment %
+      }
+    
+      body {
+        background: linear-gradient(to bottom, #fff, #3ca5cc);
+        background-attachment: fixed;
+      }
+    
+        {
+        % endcomment %
+      }
+    
+      .user_card {
+        height: 400px;
+        position: relative;
+        border-radius: 5%;
+        position: absolute;
+        top: 20%;
+        background: #5254d665;
+      }
+    
+      form {
+        margin: 20px;
+      }
+    
+      .card-body {
+          {
+          % comment %
+        }
+    
+        background: radial-gradient(#fff, #5254d6);
+        background-attachment: fixed;
+    
+          {
+          % endcomment %
+        }
+    
+        max-width:900px margin-left:200px {
+          % comment %
+        }
+    
+        float:center {
+          % endcomment %
+        }
+      }
+    
+        {
+        % comment %
+      }
+    
+      Load Animation {
+        % endcomment %
+      }
+    
+      .loader {
+        background: #fff;
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 99999;
+      }
+    
+      .loader-inner {
+        bottom: 0;
+        height: 60px;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100px;
+      }
+    
+      .loader-line-wrap {
+        animation:
+          spin 2000ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+        box-sizing: border-box;
+        height: 50px;
+        left: 0;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        transform-origin: 50% 100%;
+        width: 100px;
+      }
+    
+      .loader-line {
+        border: 4px solid transparent;
+        border-radius: 100%;
+        box-sizing: border-box;
+        height: 100px;
+        left: 0;
+        margin: 0 auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100px;
+      }
+    
+      .loader-line-wrap:nth-child(1) {
+        animation-delay: -50ms;
+      }
+    
+      .loader-line-wrap:nth-child(2) {
+        animation-delay: -100ms;
+      }
+    
+      .loader-line-wrap:nth-child(3) {
+        animation-delay: -150ms;
+      }
+    
+      .loader-line-wrap:nth-child(4) {
+        animation-delay: -200ms;
+      }
+    
+      .loader-line-wrap:nth-child(5) {
+        animation-delay: -250ms;
+      }
+    
+      .loader-line-wrap:nth-child(1) .loader-line {
+        border-color: hsl(0, 80%, 60%);
+        height: 90px;
+        width: 90px;
+        top: 7px;
+      }
+    
+      .loader-line-wrap:nth-child(2) .loader-line {
+        border-color: hsl(60, 80%, 60%);
+        height: 76px;
+        width: 76px;
+        top: 14px;
+      }
+    
+      .loader-line-wrap:nth-child(3) .loader-line {
+        border-color: hsl(120, 80%, 60%);
+        height: 62px;
+        width: 62px;
+        top: 21px;
+      }
+    
+      .loader-line-wrap:nth-child(4) .loader-line {
+        border-color: hsl(180, 80%, 60%);
+        height: 48px;
+        width: 48px;
+        top: 28px;
+      }
+    
+      .loader-line-wrap:nth-child(5) .loader-line {
+        border-color: hsl(240, 80%, 60%);
+        height: 34px;
+        width: 34px;
+        top: 35px;
+      }
+    
+    
+    
+      @keyframes spin {
+    
+        0%,
+        15% {
+          transform: rotate(0);
+        }
+    
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+
+{% block body %}
+  <body onload="myFunction()" style="margin:0;">
+
+    <div class="loader" id="loader">
+      <div class="loader-inner">
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+      </div>
+    </div>
+    
+      <nav class="navbar navbar-expand-lg navbar-light container mb-5">
+
+        {% comment %} <button type="button" class="navbar-toggler" data-toggl="collapse" data-target="#MyNav">
+          <span class="navbar-toggler-icon"></span>
+        </button> {% endcomment %}
+
+        {% comment %} <div class="collapse navbar-collapse" id="MyNav">
+          <ul class="navbar-nav">
+           
+           
+            
+          </ul>
+        </div> {% endcomment %}
+      </nav>
+
+    {% block content %}
+
+    {% endblock content %}
+
+    {% block track_down %}
+    {% endblock track_down %}
+
+    <!--Bokeh-->
+      <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-2.1.1.min.js"></script>
+      <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-2.1.1.min.js"></script>
+      <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-tables-2.1.1.min.js"></script>
+      <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-api-2.1.1.min.js"></script>
+
+      {{script|safe}}
+
+    <!--custom scripts-->
+    <script type="text/javascript" src="{% static "bmi/custom.js" %}">
+
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+  });
+</script>
+<script>
+  var myVar;
+
+  function myFunction() {
+    myVar = setTimeout(showPage, 1000);
+  }
+
+  function showPage() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
+  }
+
+</script>
+
+{% endblock %}

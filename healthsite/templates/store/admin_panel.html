@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div>
+    {% if not user or user.is_superuser == False %}
+    <h1>Did you play with urls?</h1>
+    <a href={% url 'latest' %}>Go back</a>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block products %}
+<div class="col text-center">
+    <div class="btn btn-success">
+<a href={% url 'create' %} style='color:white;'>Add New Product</a>
+    </div>
+</div>
+<div class="container">
+<div class='row'>
+{% for product in products %}
+<div class='col-md-6'>
+    <div class="card mb-3 " style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{product.image.url}}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.commercial_name}}</h5>
+                    <h5 class="card-title">Price: {{product.price}} &euro;</h5>
+                    <p class="card-text"><a href={% url 'update' product.id %} class="btn btn-dark">Update</a>
+                        <a href={% url 'delete' product.id %} class="btn btn-dark">Delete</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+</div>
+{% endblock %}

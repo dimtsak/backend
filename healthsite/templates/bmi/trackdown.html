@@ -1,0 +1,83 @@
+{% extends 'bmi/base.html' %}
+
+<style>
+    .blurred-box{
+        position: relative;
+        width: 250px;
+        height: 350px;
+        top: calc(50% - 175px);
+        left: calc(50% - 125px);
+        background: inherit;
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      
+      .blurred-box:after{
+       content: '';
+       width: 300px;
+       height: 300px;
+       background: inherit; 
+       position: absolute;
+       left: -25px;
+       left position
+       right: 0;
+       top: -25px;  
+       top position 
+       bottom: 0;
+       box-shadow: inset 0 0 0 200px rgba(255,255,255,0.05);
+       filter: blur(10px);
+      }
+</style>
+
+
+
+
+{%block content %}
+
+<div class="container">
+
+    <div>
+        <a href="{% url 'latest_homepage' %}" class='btn btn-dark'>Back to Homepage</a>
+    </div>
+    
+    <p>Congrats for watching your BMI over time</p>
+    <strong>
+        <h3>Average BMI till now: {{bmi}} ({{state}})</h3>
+    </strong>
+
+    <div class="row">
+
+        
+        
+        <div class="col-md-8">
+            <img src='/images/bmi.jpg' style='width:100%'>
+            <br>
+            <br>
+        </div>
+
+        <div class="col-md-4">
+            <div class='blurred-box'>
+            <p>Accuracy of BMI
+                BMI takes into account natural variations in body shape, giving a healthy weight range for a particular
+                height.
+
+                As well as measuring your BMI, healthcare professionals may take other factors into account when
+                assessing if you're a healthy weight.
+
+                Muscle is much denser than fat, so very muscular people, such as heavyweight boxers, weight trainers and
+                athletes, may be a healthy weight even though their BMI is classed as obese.
+
+                Your ethnic group can also affect your risk of some health conditions. For example, adults of South
+                Asian origin may have a higher risk of some health problems, such as diabetes, with a BMI of 23, which
+                is usually considered healthy.
+
+                You should not use BMI as a measure if you're pregnant. Get advice from your midwife or GP if you're
+                concerned about your weight</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{%endblock content%}

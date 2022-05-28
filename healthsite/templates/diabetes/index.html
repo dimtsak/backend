@@ -1,0 +1,165 @@
+{% extends 'diabetes/base.html' %}
+
+{% block content %}
+
+<div style='padding-left:50px; margin-bottom:10px; margin-top:-50px'>
+  <a href="{% url 'latest_homepage' %}" class='btn btn-dark'>Back to Homepage</a>
+</div>
+
+<div class="container">
+  <div class="form-row">
+    <!-#########################Col1###############-->
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="tab-bmi">
+
+        <h3>Diabetes type-2 ML Prediction</h3>
+        <p>This is an algorithmic approach considering 8 parameters in order to predict an onset 
+            of type 2 diabetes with accuracy 96,78 %.Complete the following data following the instructions in order to get 
+        a positive or negative results when it comes to a future type-2 diabetes onset.
+        <br>(the current service doesn't constitute a substitute for medical advice)</p>
+    {% if result %}
+    <div class="col-md-12 col-sm-12 col-xs-12">
+   
+    
+    
+    <p><b>High risk factors for a type-2 diabetes onset</b></p>
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">Age</div>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Number of Pregnancies</div>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Insulin</div>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">BMI</div>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Glucose</div>
+      </div>
+      <br>
+      
+      <h6>Your result will show here: {{result}} </h6>
+      
+      {% if result == 'Positive'%}
+      <p>Type 2 diabetes is an impairment in the way the body regulates and uses sugar (glucose) as a fuel. 
+         This long-term (chronic) condition results in too much sugar circulating in the bloodstream.Regulating your carbs in your meals ,exercising daily and
+        adopting a healthy walk of living.<br>We provide you <a href ={% url 'diabetic' %} > suitable nutrition products and supplements </a>
+        in order to maintain a healthy lifestyle avoiding the complications of
+        type 2 diabetes</p><hr>
+          
+      {% endif %}
+      {% if result == 'Negative'%}
+      <p>Congrats for maintaining a healthy lifestyle that keeps you away from an onset of type 2 diabetes!
+      </p>      
+      <hr>
+      {% endif %}
+      {% endif %}
+        <h6>
+        <a class="btn btn-dark" href="{% url 'info' %}" role="button">ML Info</a>
+        </h6>
+        <div>
+        {% if invalid %}
+          <h6 style="background-color:powderblue;"> {{ invalid }}</h6>      
+      {% endif %}
+        {% if Invalid %}
+            <h6 style="background-color:powderblue;"> {{ Invalid }}</h6>      
+        {% endif %}
+                
+                 
+                
+        {%if listError %}
+            <h6 style="background-color:powderblue;"> {{ listError }}</h6>      
+        {% endif %}
+               </div>
+
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div>
+                
+
+
+            <div class="col-8">
+                <label for="">Age </label>
+                <input type="text" name="age" class="form-control" required placeholder="y.o.">
+              </div>
+
+              
+              
+              <div class="col-8">
+                <label for="">Glucose </label>
+                  <a href="#" title="Blood Glucose Levels" data-toggle="popover" data-trigger="focus"
+                    data-content="Plasma glucose concentration over 2 hours in an oral glucose tolerance test.Put the value of your latest examination.If you can't recall type a value between 120 and 130">?</a>
+                <input type="text" name="glucose" class="form-control" required placeholder="">
+              </div>
+
+              
+              
+              <div class="col-8">
+                <label for="">Blood Pressure</label>
+                  <a href="#" title="Your average blood Pressure" data-toggle="popover" data-trigger="focus"
+                    data-content="The blood pressure you count when you are calm,without having eaten a meal,preferrably early in the morning,e.g 11">?</a>
+                <input type="text" name="bp" class="form-control" required placeholder="">
+              </div>
+             
+              
+              
+              <div class="col-8">
+                <label for="">Skin Thickness</label>
+                 <a href="#" title="Triceps skin fold thickness " data-toggle="popover" data-trigger="focus"
+                 data-content="Press 1 for thin skin,
+                 2 for normal,
+                 3 for thick skin">?</a>
+                 <input type="text" name="skin" class="form-control" required placeholder="">
+               </div>
+
+              
+              
+               <div class="col-8">
+                <label for="">Insulin </label>
+                  <a href="#" title="2-Hour serum insulin" data-toggle="popover" data-trigger="focus"
+                    data-content=".Put the value of your latest examination.If you can't recall type a value between 80 and 90">?</a>
+                <input type="text" name="insulin" class="form-control" required placeholder="mu U/ml">
+              </div>
+
+              
+              
+              <div class="col-8">
+                <label for="">Pedigree</label>
+                  <a href="#" title="Diabetes Pedigree Function" data-toggle="popover" data-trigger="focus"
+                    data-content=".Press 0 if there is not family history,
+                    1 if a second level relative has diabetes,
+                    2 if one of your parents has diabetes">?</a>
+                <input type="text" name="pedigree" class="form-control" required placeholder='0 1 or 2'>
+              </div>
+            
+            
+            <div class="col-8">
+                <label for="">BMI <a href = "{% url 'bmi'  %}">Calculate it here</a></label>
+                <input type="text" name="bmi" class="form-control" required placeholder="kg/m2">
+              </div>
+
+
+
+            <div class="col-8">
+                <label for="">Pregnancies</label>
+                <input type="text" name="pregnancies" class="form-control" required placeholder="number of pregnancies">
+            </div>
+            <br>
+        
+            <br>
+             <button type="submit" class="btn btn-dark" >Calculate</button>
+            <br>
+        
+        
+        </form>
+        <br>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,93 @@
+{% extends 'bmi/base.html' %} 
+{% block content %}
+<form>
+    <div class="card text-center">
+        <div class="card-header">
+            Diabetes ML Prediction
+        </div>
+        <div class="card-body">
+          <p class="card-text">This is an algorithmic approach considering 8 parameters in order to predict an onset of type 2 diabetes with accuracy 96,78 %</p>
+        </div>
+        <div class="card-footer text-muted">
+            <form method="post">
+                {% csrf_token %}
+                <div class="col-6">
+                    <label for="">Age </label>
+                    <input type="text" name="age" class="form-control" required placeholder="y.o.">
+                </div>
+                <div class="col-12">
+                    <label for="">Glucose
+                        <a href="#" title="Blood Glucose Levels" data-toggle="popover" data-trigger="focus"
+                        data-content="Plasma glucose concentration over 2 hours in an oral glucose tolerance test.Put the value of your latest examination.If you can't recall type a value between 120 and 130">?</a>
+                        <input type="text" name="glucose" class="form-control" required placeholder="">
+                    </div>
+                    
+                    <div class="col-12">
+                        <label for="">Blood Pressure
+                            <a href="#" title="Your average blood Pressure" data-toggle="popover" data-trigger="focus"
+                            data-content="The blood pressure you count when you are calm,without having eaten a meal,preferrably early in the morning,e.g 11">?</a>
+                            <input type="text" name="bp" class="form-control" required placeholder="">
+                        </div>
+                        
+                        <div class="col-12">
+                            <label for="">Skin Thickness
+                                <a href="#" title="Triceps skin fold thickness " data-toggle="popover" data-trigger="focus"
+                                data-content="Press 1 for thin skin,
+                                2 for normal,
+                                3 for thick skin">?</a>
+                                <input type="text" name="skin" class="form-control" required placeholder="">
+                            </div>
+
+                            <div class="col-12">
+                                <label for="">Insulin
+                                    <a href="#" title="2-Hour serum insulin" data-toggle="popover" data-trigger="focus"
+                                    data-content=".Put the value of your latest examination.If you can't recall type a value between 80 and 90">?</a>
+                                    <input type="text" name="insulin" class="form-control" required placeholder="mu U/ml">
+                                </div>
+                                
+                                
+                                <div class="col-12">
+                                    <label for="">Pedigree
+                                        <a href="#" title="Diabetes Pedigree Function" data-toggle="popover" data-trigger="focus"
+                                        data-content=".Press 0 if there is not family history,
+                                        1 if a second level relative has diabetes,
+                                        2 if one of your parents has diabetes">?</a>
+                                        <input type="text" name="pedigree" class="form-control" required placeholder="mu U/ml">
+                                    </div>
+                                    
+                                    <div class="col-12">
+                                        <label for="">BMI <a href="{% url 'bmi'  %}">Calculate it here</a>
+                                            <input type="text" name="bmi" class="form-control" required placeholder="kg/m2">
+                                        </div>
+                                        
+                                        <div class="col-6">
+                  <label for="">Pregnancies</label>
+                  <input type="text" name="pregnancies" class="form-control" required
+                  placeholder="number of pregnancies">
+                </div>
+                
+                {% if request.user.is_authenticated %}
+                <div class="form-check my-5">
+                  <input class="form-check-input" checked="checked" name="save" value="on" type="checkbox">
+                  <label for="" class="form-check-label">Save It.
+                      <a href="#" title="Why to save it?" data-toggle="popover" data-trigger="focus"
+                      data-content="In case you want to track your weight, you can save it.(login required)">?</a>
+                    </label>
+                </div>
+                {% else %}
+                <div class="form-check my-5">
+                  <input disabled class="form-check-input" checked="checked" name="save" value="on" type="checkbox">
+                  <label for="" class="form-check-label">Save It.
+                      <a href="#" title="Why to save it?" data-toggle="popover" data-trigger="focus"
+                      data-content="In case you want to track your weight, you can save it.(login required)">?</a>
+                    </label>
+                </div>
+                {% endif %}
+                
+                <button type="submit" class="btn btn-dark">Calculate</button>
+                
+            </form>
+        </div>
+    </div>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+    {% endblock %}

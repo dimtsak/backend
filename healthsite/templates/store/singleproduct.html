@@ -1,0 +1,118 @@
+{% extends 'index.html' %}
+{% block content%}
+<div class='container-fluid'style='display-flex;'>
+<div class='row'>
+<div class="col-lg-8"style="margin-bottom:102px">
+    <div class="card " style="max-width: 1200px; margin-top:30px; margin-bottom:30px; overflow:hidden;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{singleproduct.image.url}} "width ="100%"/class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{singleproduct.commercial_name}} {{singleproduct.price}} &euro; </h5>
+              <p class="card-title"><strong>Description</strong></p>
+              <p class="card-text"style='word-wrap:break-word;'><pre>{{ singleproduct.description | safe }}</pre></p>
+            </div>
+          </div>
+        </div>
+    </div>
+    {% if user.is_superuser  %}
+    {% else %}
+    <div style='float:right; margin-right:35px;'><a href={% url 'add_to_basket' singleproduct.id %} class="btn btn-dark add">Add to cart</a></div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      {% comment %} <div class="footer-col-1">
+        <h3>Download our app</h3>
+        <p>Download for Android and ios mobile devices.</p>
+        <div class="app-logo">
+          <img src="#" alt="Play Store Image">
+          <img src="#" alt="App Store Image">
+        </div>
+      </div> {% endcomment %}
+      <div class="footer-col-3">
+        <h3>Useful links</h3>
+        <ul>
+            <i class="fa-solid fa-circle-info" style='color:blue;'></i>
+          <li><a href="{% url 'contact' %}" style="color:white">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col-2">
+        <p>Aspiring to provide our users tools to watch their general health in order to suggest them suitable products!</p>
+      </div>
+      <div class="footer-col-4">
+        <h3>Follow us</h3>
+        <ul>
+        <a href="https:/www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i><li></li></a>
+        <a href="https:/www.twitter.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+          <a href="https:/www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <p class="copyright">&copy; Copyright 2022</p>
+  </div>
+</div>
+{% endblock %}
+
+{% comment %}  
+{% block content %}
+
+<table class ='table'>
+<tr>
+<th>{{singleproduct.commercial_name}}</th>
+ <th></th> {% 
+ <th>Description</th> {% 
+<th>Price</th>
+
+</tr>
+    {% if singleproduct %}
+<tr>
+ <td> {{singleproduct.name}} </td>
+    <td> <img src = "{{singleproduct.image.url}} "width ="500p x"/><br><pre>{{singleproduct.description}}</pre></td>
+    {% comment %} <td style="text-align:left"><pre>{{ singleproduct.description | safe }}</pre></td> 
+    <td>{{singleproduct.price}} &euro; </td>
+    <td><a class="btn btn-md btn-warning" href = "{% url 'add_to_basket' singleproduct.id %}"</a><span><i class="fas fa-shopping-cart"></i></span></td>
+</tr>
+    {% endif %}
+</table>
+{% endblock %}
+{% endcomment %}
+
+
+
+
+
+
+{% comment %} {% extends 'index.html' %}
+    {% block content %}
+   
+    <table class ='table'>
+    <tr>
+    <th>Name</th>
+    <th>Image</th>
+    <th>Price</th>
+    {% comment %} <th>Category</th>
+    <th>Diab.Friendly</th> 
+    </tr>
+        {% if singleproduct %}
+    <tr>
+        <td>{{singleproduct.name}}</td>
+        <td>{{singleproduct.commercial_name}}</td>
+        <td> <img src = "{{singleproduct.image.url}}"width ="500p x"/></td>
+        <td>{{singleproduct.price}}</td>
+        <td>{{singleproduct.category}}</td>
+        <td>{{singleproduct.is_diab}}</td> 
+        <td><a class="btn btn-md btn-warning add" href = "{% url 'add_to_basket' singleproduct.id %}"</a><span><i class="fas fa-shopping-cart"></i></span></td>
+    </tr>
+        {% endif %}
+    </table>
+    
+        {% endblock %} {% endcomment %}
